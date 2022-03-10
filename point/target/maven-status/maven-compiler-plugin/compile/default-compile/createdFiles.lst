@@ -1,0 +1,7 @@
+com\xd\point\HttpInterceptor.class
+com\xd\point\WebConfig.class
+com\xd\point\rest\DoRest.class
+com\xd\point\GlobalUtils.class
+com\xd\point\service\impl\DotServiceImpl.class
+com\xd\point\Application.class
+com\xd\point\service\DotService.class

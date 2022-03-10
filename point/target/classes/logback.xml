@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,,,, -->
+	<appender name="stdout"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%t] [%c] [%p] (%file:%line\)- %m%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	<appender name="baselog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>log/run.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/run.log.%d.%i</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 64 MB -->
+				<maxFileSize>64 MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				%d [%t] [%c] [%p] (%file:%line\)- %m%n
+			</pattern>
+			<charset>UTF-8</charset> <!-- 此处设置字符集 -->
+		</encoder>
+	</appender>
+	<appender name="logstash"
+		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>47.104.201.248:4567</destination>
+		<encoder charset="UTF-8"
+			class="net.logstash.logback.encoder.LogstashEncoder">
+			<!-- "appname":作用是指定创建索引的名字时用，并且在生成的文档中会多了这个字段 -->
+			<customFields>{"appname":"test-md-webapi-dus"}</customFields>
+		</encoder>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="stdout" />
+	</root>
+	<logger name="com.md" level="DEBUG">
+		<appender-ref ref="baselog" />
+		<appender-ref ref="logstash" />
+	</logger>
+</configuration>

@@ -1,0 +1,6 @@
+com\xd\mq\base\PdBaseMqService.class
+com\xd\mq\po\DotAppEventHis.class
+com\xd\mq\service\ProducerMqService.class
+com\xd\mq\base\PdBaseMqService$1.class
+com\xd\mq\vo\DotAppEventHisVo.class
+com\xd\mq\service\impl\ProducerMqServiceImpl.class
